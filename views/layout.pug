@@ -2,7 +2,15 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="/javascripts/index.js" defer=true) 
   body
-    block content
+
+  img(src="/images/bonfire.gif" alt='logo' class="bonfire_logo")
+  nav    
+    ul 
+      li Games 
+      li Genres 
+      li Platforms 
+      
+  block content
