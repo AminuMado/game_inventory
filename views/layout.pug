@@ -5,12 +5,33 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="/javascripts/index.js" defer=true) 
   body
-
   img(src="/images/bonfire.gif" alt='logo' class="bonfire_logo")
-  nav    
-    ul 
-      li Games 
-      li Genres 
-      li Platforms 
-      
+  div(class="overlay")
+  nav(class="sidebar_container")
+   h1 Dashboard
+   ul(class='sidebar-nav')
+     li
+       a(href='/') Home
+     li
+       a(href='/games') Games
+     li
+       a(href='/developers') Developers
+     li
+       a(href='/genres') Genres
+     li
+       a(href='/platforms') Platforms
+     li
+       a(href='/reviews') Reviews
+     li
+       hr
+     li
+       a(href='/game/create') Create new Game
+     li
+       a(href='/genre/create') Create new Genre
+     li
+       a(href='/developer/create') Create new Developer
+     li
+       a(href='/platform/create') Create new Platform
+     li
+       a(href='/review/create') Create new Review
   block content
