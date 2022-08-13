@@ -45,13 +45,11 @@ router.get("/games", game_controller.game_list);
 
 // Get Request for Creating a Developer NOTE This must come before routes that display developer (uses id)
 router.get("/developer/create", developer_controller.developer_create_get);
-
 // Post Request for Creating a Developer
 router.get("/developer/create", developer_controller.developer_create_post);
 
 // Get Request for Deleting a Developer
 router.get("/developer/:id/delete", developer_controller.developer_delete_get);
-
 // Post Request for Deleting a Developer
 router.post(
   "/developer/:id/delete",
@@ -60,7 +58,6 @@ router.post(
 
 // Get Request to Update a Developer
 router.get("/developer/:id/update", developer_controller.developer_update_get);
-
 // Post Request to Update a Developer
 router.post(
   "/developer/:id/update",
@@ -72,3 +69,30 @@ router.get("/developer/:id", developer_controller.developer_detail);
 
 //Get Request for all Developers
 router.get("/developers", developer_controller.developer_list);
+
+// Platform Routes
+
+// Get Request for Create a Platform
+router.get("/platform/create", platform_controller.platform_create_get);
+// Post Request for Create a Platform
+router.post("/platform/create", platform_controller.plaform_create_post);
+
+// Get Request for Delete a Platform
+router.get("/platform/:id/delete", platform_controller.platform_delete_get);
+// Post Request for Delete a Platform
+router.get("/platform/:id/delete", platform_controller.platform_delete_post);
+
+// Get Request for Update a Platform
+router.get("/platform/:id/update", platform_controller.platform_update_get);
+// Post Request for Update a Platform
+router.post("/platform/:id/update", platform_controller.platform_update_post);
+
+// Get Request for one Platform
+router.get("/platform/:id", platform_controller.platform_detail);
+// Get Request for all Platforms
+router.get("/platforms", platform_controller.platform_list);
+
+// Genre Routes
+// Review Routes
+
+module.exports = router;
