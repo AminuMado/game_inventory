@@ -1,8 +1,28 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: black;
+  color: #00b7ff;
 }
-
+.bonfire_logo {
+  width: 112px;
+  height: 165px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+  filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+  position: fixed;
+  top: 15px;
+  left: 15px;
+}
+.bonfire_logo:hover {
+  transform: scale(1.05);
+  filter: none;
+}
+.bonfire_logo:active {
+  transform: scale(0.95);
+}
 a {
-  color: #00B7FF;
+  color: #00b7ff;
 }
