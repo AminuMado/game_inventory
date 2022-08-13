@@ -1,6 +1,5 @@
 var express = require("express");
 var router = express.Router();
-
 // Require Controller Modules
 const developer_controller = require("../controllers/developerController");
 const game_controller = require("../controllers/gameController");
