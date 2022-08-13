@@ -7,7 +7,6 @@ const game_controller = require("../controllers/gameController");
 const genre_controller = require("../controllers/genreController");
 const platform_controller = require("../controllers/platformController");
 const review_controller = require("../controllers/reviewController");
-const genre = require("../models/genre");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -15,9 +14,6 @@ router.get("/", function (req, res, next) {
 });
 
 /// GAME ROUTES ///
-
-// GET  home page.
-router.get("/", game_controller.index);
 
 // GET request for creating a Game. NOTE This must come before routes that display Game (uses id).
 router.get("/game/create", game_controller.game_create_get);
@@ -77,7 +73,7 @@ router.get("/developers", developer_controller.developer_list);
 // Get Request to Create a Platform
 router.get("/platform/create", platform_controller.platform_create_get);
 // Post Request to Create a Platform
-router.post("/platform/create", platform_controller.plaform_create_post);
+router.post("/platform/create", platform_controller.platform_create_post);
 
 // Get Request to Delete a Platform
 router.get("/platform/:id/delete", platform_controller.platform_delete_get);
