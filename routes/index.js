@@ -6,6 +6,7 @@ const game_controller = require("../controllers/gameController");
 const genre_controller = require("../controllers/genreController");
 const platform_controller = require("../controllers/platformController");
 const reviews_controller = require("../controllers/reviewsController");
+const genre = require("../models/genre");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -72,19 +73,19 @@ router.get("/developers", developer_controller.developer_list);
 
 // Platform Routes
 
-// Get Request for Create a Platform
+// Get Request to Create a Platform
 router.get("/platform/create", platform_controller.platform_create_get);
-// Post Request for Create a Platform
+// Post Request to Create a Platform
 router.post("/platform/create", platform_controller.plaform_create_post);
 
-// Get Request for Delete a Platform
+// Get Request to Delete a Platform
 router.get("/platform/:id/delete", platform_controller.platform_delete_get);
-// Post Request for Delete a Platform
+// Post Request to Delete a Platform
 router.get("/platform/:id/delete", platform_controller.platform_delete_post);
 
-// Get Request for Update a Platform
+// Get Request to Update a Platform
 router.get("/platform/:id/update", platform_controller.platform_update_get);
-// Post Request for Update a Platform
+// Post Request to Update a Platform
 router.post("/platform/:id/update", platform_controller.platform_update_post);
 
 // Get Request for one Platform
@@ -93,6 +94,25 @@ router.get("/platform/:id", platform_controller.platform_detail);
 router.get("/platforms", platform_controller.platform_list);
 
 // Genre Routes
+// Get Request to Create a Genre
+router.get("/genre/create", genre_controller.genre_create_get);
+// Post Request to Create a Genre
+router.post("/genre/create", genre_controller.genre_create_post);
+
+// Get Request to Delete a Genre
+router.get("/genre/:id/delete", genre_controller.genre_delete_get);
+// Post Request to Delete a Genre
+router.post("/genre/:id/delete", genre_controller.genre_delete_post);
+
+// Get Request to Update a Genre
+router.get("/genre/:id/update", genre_controller.genre_update_get);
+// Post Request to Update a Genre
+router.post("/genre/:id/update", genre_controller.genre_update_post);
+
+// Get Request for one Genre
+router.get("/genre/:id", genre_controller.genre_detail);
+// Get Request for all Genres
+router.get("/genres", genre_controller.genre_list);
 // Review Routes
 
 module.exports = router;
