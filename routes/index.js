@@ -40,3 +40,35 @@ router.get("/game/:id", game_controller.game_detail);
 
 // GET request for list of all game items.
 router.get("/games", game_controller.game_list);
+
+/// DEVELOPER ROUTES ///
+
+// Get Request for Creating a Developer NOTE This must come before routes that display developer (uses id)
+router.get("/developer/create", developer_controller.developer_create_get);
+
+// Post Request for Creating a Developer
+router.get("/developer/create", developer_controller.developer_create_post);
+
+// Get Request for Deleting a Developer
+router.get("/developer/:id/delete", developer_controller.developer_delete_get);
+
+// Post Request for Deleting a Developer
+router.post(
+  "/developer/:id/delete",
+  developer_controller.developer_delete_post
+);
+
+// Get Request to Update a Developer
+router.get("/developer/:id/update", developer_controller.developer_update_get);
+
+// Post Request to Update a Developer
+router.post(
+  "/developer/:id/update",
+  developer_controller.developer_update_post
+);
+
+// Get Request for one Developer
+router.get("/developer/:id", developer_controller.developer_detail);
+
+//Get Request for all Developers
+router.get("/developers", developer_controller.developer_list);
