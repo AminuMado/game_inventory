@@ -1,8 +1,15 @@
+* {
+  padding: 0;
+  margin: 0;
+}
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: black;
   color: #00b7ff;
+}
+.main_content {
+  margin: 5px 5px 5px 120px;
 }
 .bonfire_logo {
   width: 112px;
@@ -15,6 +22,7 @@ body {
   position: fixed;
   top: 15px;
   left: 15px;
+  z-index: 2;
 }
 .bonfire_logo:hover {
   transform: scale(1.05);
@@ -25,4 +33,39 @@ body {
 }
 a {
   color: #00b7ff;
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+  text-decoration: none;
+}
+/* NavBar Styles */
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(26, 25, 25, 0.5);
+  top: 0;
+  left: 0;
+  transition: all 1s ease;
+  transform: translateX(100vw);
+}
+.overlay.active {
+  transform: translateX(0);
+}
+.sidebar_container {
+  min-width: 300px;
+  width: 400px;
+  height: 100vh;
+  background-color: black;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 200px 10px 10px 10px;
+  transition: all 1s ease;
+  transform: translateX(-50vw);
+}
+.sidebar_container.active {
+  transform: translateX(0);
 }
