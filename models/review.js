@@ -16,3 +16,6 @@ const ReviewSchema = new Schema({
 ReviewSchema.virtual("url").get(function () {
   return `/review/${this._id}`;
 });
+
+// export
+module.exports = mongoose.model("Review", ReviewSchema);
