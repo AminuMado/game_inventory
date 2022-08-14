@@ -12,7 +12,7 @@ var app = express();
 var mongoose = require("mongoose");
 //Set up mongoose connection
 var mongoDB =
-  "mongodb+srv://lordGwynOfLodran:R6098pziCv44Xm9E@cluster0.iztbrfr.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://lordGwynOfLodran:R6098pziCv44Xm9E@cluster0.iztbrfr.mongodb.net/game_inventory?retryWrites=true&w=majority";
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 //Ge the default connection
 var db = mongoose.connection;
