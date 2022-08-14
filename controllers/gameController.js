@@ -1,3 +1,5 @@
+const Game = require("../models/game");
+
 //Display Home Page
 exports.home_page = (req, res) => {
   res.render("index", { title: "The Bonfire" });
@@ -5,7 +7,14 @@ exports.home_page = (req, res) => {
 
 // Display list of all Games
 exports.game_list = (req, res) => {
-  res.send("NOT IMPLEMENTED: Game List");
+  Game.find({}).exec(function (err, list_games) {
+    if (err) {
+      return next(err);
+    }
+    //Successful, so render
+    res.render("game_list", { title: "All Games", game_list: list_games });
+    console.log(list_games);
+  });
 };
 
 // Display Detail Page for a specific Game
