@@ -1,3 +1,8 @@
+//Display Home Page
+exports.home_page = (req, res) => {
+  res.render("index", { title: "The Bonfire" });
+};
+
 // Display list of all Games
 exports.game_list = (req, res) => {
   res.send("NOT IMPLEMENTED: Game List");
