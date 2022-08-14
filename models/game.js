@@ -19,3 +19,11 @@ const GameSchema = new Schema({
   developer: { type: Schema.Types.ObjectId, ref: "Developer", required: true },
   genre: { type: Schema.Types.ObjectId, ref: "Genre", required: false },
 });
+
+//Virtual for game's URL
+GameSchema.virtual("url").get(function () {
+  return `/game/${this._id}`;
+});
+
+//Export model
+module.exports = mongoose.model("Game", GameSchema);
