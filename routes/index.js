@@ -8,9 +8,7 @@ const platform_controller = require("../controllers/platformController");
 const review_controller = require("../controllers/reviewController");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "The Bonfire" });
-});
+router.get("/", game_controller.home_page);
 
 /// GAME ROUTES ///
 
