@@ -4,15 +4,18 @@ const mongoose = require("mongoose");
 // Define a Schema
 const Schema = mongoose.Schema;
 
-const PlatformSchema = new Schema({
+const platformSchema = new Schema({
   name: { type: String, required: true, maxLength: 100, minLength: 3 },
   icon: { type: String, required: false },
 });
 
 //Virtual for platform's URL
-PlatformSchema.virtual("url").get(function () {
+platformSchema.virtual("url").get(function () {
   return `/platform/${this._id}`;
 });
 
+// Create Model
+const Platform = mongoose.model("Platform", platformSchema);
+
 //Export model
-module.exports = mongoose.model("Platform", PlatformSchema);
+module.exports = Platform;

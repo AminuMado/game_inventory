@@ -4,14 +4,17 @@ const mongoose = require("mongoose");
 //Define a schema
 const Schema = mongoose.Schema;
 
-const GenreSchema = new Schema({
+const genreSchema = new Schema({
   name: { type: String, required: true, maxLength: 100, minLength: 3 },
 });
 
 //Virtual for genre's URL
-GenreSchema.virtual("url").get(function () {
+genreSchema.virtual("url").get(function () {
   return `/genre/${this._id}`;
 });
 
-//Export model
-module.exports = mongoose.model("Genre", GenreSchema);
+//Create model
+const Genre = mongoose.model("Genre", genreSchema);
+
+// Export Model
+module.exports = Genre;

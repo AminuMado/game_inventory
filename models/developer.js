@@ -1,9 +1,10 @@
 //Require mongoose
 const mongoose = require("mongoose");
+
 //Define a schema
 const Schema = mongoose.Schema;
 
-const DeveloperSchema = new Schema({
+const developerSchema = new Schema({
   name: { type: String, required: true, maxLength: 100, minLength: 3 },
   founded: { type: Number, required: true },
   summary: { type: String, required: true },
@@ -11,9 +12,11 @@ const DeveloperSchema = new Schema({
 });
 
 //Virtual property
-DeveloperSchema.virtual("url").get(function () {
+developerSchema.virtual("url").get(function () {
   return `/developer/${this._id}`;
 });
 
+// Create Model
+const Developer = mongoose.model("Developer", developerSchema);
 //Export model
-module.exports = mongoose.model("Developer", DeveloperSchema);
+module.exports = Developer;

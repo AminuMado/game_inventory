@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 //Define Schema
 const Schema = mongoose.Schema;
 
-const ReviewSchema = new Schema({
+const reviewSchema = new Schema({
   game: { type: Schema.Types.ObjectId, ref: "Game", required: true },
   sourceSite: { type: String, required: true },
   content: { type: String, required: false },
@@ -13,9 +13,12 @@ const ReviewSchema = new Schema({
 });
 
 //Virtual for review's URL
-ReviewSchema.virtual("url").get(function () {
+reviewSchema.virtual("url").get(function () {
   return `/review/${this._id}`;
 });
 
-// export
-module.exports = mongoose.model("Review", ReviewSchema);
+// Create Model
+const Review = mongoose.model("Review", reviewSchema);
+
+// export model
+module.exports = Review;
