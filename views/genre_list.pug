@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  main(class="main_content")
+    h1= title 
+    section
+    div(class="genre_container")
+      each genre in genre_list
+        a(class="genre" href=genre.url) #{genre.name}
+      else
+       li Seems like there are no genres. Add new genres.
+    
