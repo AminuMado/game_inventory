@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  main(class="main_content")
+    h1= title 
+    section  
+     ul
+      each developer in developer_list
+       li
+        a(href=developer.url) #{developer.title}
+      else
+       li Seems like there are no developers. Add new developers.
+    section 
+     div(class="developer_cards_container")
+      a(class="developer_card" style="--bg-image: url(/images/Bethesda_Softworks_Logo.svg)")
+      a(class="developer_card" style="--bg-image: url(/images/Fromsoftware_logo.svg)")
+      a(class="developer_card" style="--bg-image: url(/images/Santa_Monica_Studio.svg)")
+      a(class="developer_card" style="--bg-image: url(/images/Naughty_Dog.svg)")
+      a(class="developer_card" style="--bg-image: url(/images/Konami_4th_logo_1.svg)")
+      a(class="developer_card" style="--bg-image: url(/images/PlatinumGames_Inc..png)")
+      a(class="developer_card" style="--bg-image: url(/images/Square_Enix_logo.svg)")
+      a(class="developer_card" style="--bg-image: url(/images/Square_Logo.svg)")
