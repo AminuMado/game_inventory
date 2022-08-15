@@ -13,7 +13,6 @@ exports.game_list = (req, res) => {
     }
     //Successful, so render
     res.render("game_list", { title: "All Games", game_list: list_games });
-    console.log(list_games);
   });
 };
 
