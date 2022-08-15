@@ -2,9 +2,9 @@
   --text-color: hsl(0, 0%, 97%);
   --text-color-grey: hsl(0, 0%, 73%);
   --bg-color: hsl(0, 0%, 0%);
-  --primary: hsl(9, 69%, 54%);
+  --primary: #b10f2e;
   --primary-active: hsl(9, 69%, 44%);
-  --primary-hover: hsl(9, 69%, 60%);
+  --primary-hover: #e63946;
 }
 * {
   padding: 0;
@@ -214,13 +214,13 @@ a.featured:hover .featured_title {
   transition: all 0.3s ease;
 }
 /* Top Rated Section */
-.cards_container {
+.game_cards_container {
   display: grid;
   gap: 1.5em;
   grid-template-columns: repeat(auto-fit, minmax(10.7vw, 250px));
   place-content: center;
 }
-.card {
+.game_card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -230,10 +230,10 @@ a.featured:hover .featured_title {
   aspect-ratio: 9/14;
   cursor: pointer;
 }
-.card:hover {
+.game_card:hover {
   transform: scale(1.05);
 }
-.card::before {
+.game_card::before {
   content: "";
   position: absolute;
   top: 0;
@@ -246,7 +246,7 @@ a.featured:hover .featured_title {
   background-image: var(--bg-image);
   filter: brightness(0.85);
 }
-.card::after {
+.game_card::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -259,7 +259,7 @@ a.featured:hover .featured_title {
 a.card {
   text-decoration: none;
 }
-.card_title {
+.game_card_title {
   font-size: 1.2em;
   font-weight: 700;
   text-overflow: ellipsis;
@@ -271,16 +271,16 @@ a.card {
   opacity: 0.7;
   text-align: center;
 }
-.card:hover .card_title {
+.game_card:hover .card_title {
   opacity: 1;
 }
-.developer_cards_container {
+.cards_container {
   display: grid;
   gap: 1.5em;
   grid-template-columns: repeat(auto-fit, 600px);
   place-content: center;
 }
-.developer_card {
+.card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -290,7 +290,7 @@ a.card {
   cursor: pointer;
   filter: brightness(0.85);
 }
-.developer_card::before {
+.card::before {
   content: "";
   position: absolute;
   top: 0;
@@ -304,7 +304,33 @@ a.card {
   background-image: var(--bg-image);
   background-color: gainsboro;
 }
-.developer_card:hover {
+.card:hover {
   transform: scale(1.05);
   filter: brightness(1);
+}
+
+/* genre */
+.genre_container {
+  display: grid;
+  gap: 1.5em;
+  grid-template-columns: repeat(auto-fit, 300px);
+  place-content: center;
+}
+.genre {
+  border-radius: 1em;
+  border: none;
+  background-color: var(--primary);
+  color: var(--text-color);
+  padding: 1em 1.5em;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+.genre:hover {
+  background-color: var(--primary-hover);
+  transition: transform 200ms ease;
+  transform: scale(1.05);
 }
