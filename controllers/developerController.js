@@ -2,14 +2,14 @@ const Developer = require("../models/developer");
 
 // Display list of All Developers
 exports.developer_list = (req, res) => {
-  Developer.find().exec((err, list_developers) => {
+  Developer.find().exec((err, list_developer) => {
     if (err) {
       return next(err);
     }
     // Successful
     res.render("developer_list", {
       title: "All Developers",
-      developer_list: list_developers,
+      developer_list: list_developer,
     });
   });
 };
