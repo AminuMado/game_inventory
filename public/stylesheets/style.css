@@ -274,3 +274,37 @@ a.card {
 .card:hover .card_title {
   opacity: 1;
 }
+.developer_cards_container {
+  display: grid;
+  gap: 1.5em;
+  grid-template-columns: repeat(auto-fit, 600px);
+  place-content: center;
+}
+.developer_card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 3em 1em;
+  transition: transform 200ms ease;
+  cursor: pointer;
+  filter: brightness(0.85);
+}
+.developer_card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: var(--bg-image);
+  background-color: gainsboro;
+}
+.developer_card:hover {
+  transform: scale(1.05);
+  filter: brightness(1);
+}
