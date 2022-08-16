@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  main(class="main_content")
+    h1= title 
+    section
+      each review in review_list
+       div(class="review")
+        h1(class="review_title") For: Metal Gear Soilid 2
+        ul
+         li
+          a(href=review.url) from #{review.sourceSite}, rating: #{review.rating}
+      else
+        h1  Seems like there are no reviews. Add a new review.
+    
