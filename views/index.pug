@@ -12,15 +12,15 @@ block content
         p We have the following records:
         ul(class="records_container")
           li
-            a(href='/games') Games:10
+            a(href='/games') Games:#{data.game_count}
           li
-            a(href='/developers') Developers:3
+            a(href='/developers') Developers:#{data.developer_count}
           li
-            a(href='/genres') Genres:4
+            a(href='/genres') Genres:#{data.genre_count}
           li
-            a(href='/platforms') Platforms:5
+            a(href='/platforms') Platforms:#{data.platform_count}
           li
-            a(href='/reviews') Reviews:6
+            a(href='/reviews') Reviews:#{data.review_count}
           
     section
       h1 Spotlight 
