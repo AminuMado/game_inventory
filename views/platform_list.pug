@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  main(class="main_content")
+    h1= title 
+    section
+    div(class="platform_container")
+      each platform in platform_list
+        a(class="platform" href=platform.url) #{platform.name}
+      else
+       li Seems like there are no platforms. Add a new platform.
+    
