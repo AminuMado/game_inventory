@@ -1,6 +1,15 @@
+//Require Review model
+const Review = require("../models/review");
 // Display list of All Review
 exports.review_list = (req, res) => {
-  res.send("NOT IMPLEMENTED: Review List");
+  Review.find().exec((err, list_review) => {
+    if (err) return next(err);
+    // Successful
+    res.render("review_list", {
+      title: "All Reviews",
+      review_list: list_review,
+    });
+  });
 };
 
 // Display Details for a Specific Review
