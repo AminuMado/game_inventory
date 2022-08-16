@@ -334,3 +334,50 @@ a.card {
   transition: transform 200ms ease;
   transform: scale(1.05);
 }
+
+/* Platform */
+.platform_container {
+  display: grid;
+  gap: 1.5em;
+  grid-template-columns: repeat(auto-fit, 300px);
+  place-content: center;
+}
+.platform {
+  border-radius: 1em;
+  border: none;
+  background-color: #69306d;
+  color: var(--text-color);
+  padding: 1em 1.5em;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+.platform:hover {
+  background-color: #3c096c;
+  transition: transform 200ms ease;
+  transform: scale(1.05);
+}
+/* Review */
+.review_container {
+  display: grid;
+  gap: 1.5em;
+  grid-template-columns: repeat(auto-fit, 400px);
+  place-content: center;
+}
+.review {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  align-items: center;
+}
+.review a {
+  font-size: 22px;
+  transition: all 200ms ease;
+}
+.review a:hover {
+  color: var(--primary-hover);
+}
