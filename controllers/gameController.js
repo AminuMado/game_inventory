@@ -1,8 +1,37 @@
 const Game = require("../models/game");
-
+const Genre = require("../models/genre");
+const Developer = require("../models/developer");
+const Platform = require("../models/platform");
+const Review = require("../models/review");
+const async = require("async");
 //Display Home Page
 exports.home_page = (req, res) => {
-  res.render("index", { title: "The Bonfire" });
+  async.parallel(
+    {
+      game_count: function (callback) {
+        Game.countDocuments({}, callback); // Pass an empty object as match condition to find all documents of this collection
+      },
+      developer_count: function (callback) {
+        Developer.countDocuments({}, callback);
+      },
+      platform_count: function (callback) {
+        Platform.countDocuments({ status: "Available" }, callback);
+      },
+      review_count: function (callback) {
+        Review.countDocuments({}, callback);
+      },
+      genre_count: function (callback) {
+        Genre.countDocuments({}, callback);
+      },
+    },
+    (err, results) => {
+      res.render("index", {
+        title: "The Bonfire",
+        error: err,
+        data: results,
+      });
+    }
+  );
 };
 
 // Display list of all Games
