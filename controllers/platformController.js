@@ -1,8 +1,16 @@
+// Require Platfrom Model
+const Platform = require("../models/platform");
 // Display List of all Platforms
 exports.platform_list = (req, res) => {
-  res.send("NOT IMPLEMENTED: Platform List");
+  Platform.find().exec((err, list_platform) => {
+    if (err) return next(err);
+    // Successful
+    res.render("platform_list", {
+      title: "All Platforms",
+      platform_list: list_platform,
+    });
+  });
 };
-
 // Display a Detail Page for a Specific Platform
 exports.platform_detail = (req, res) => {
   res.send(`NOT IMPLEMENTED: Platform Detail ${req.params.id}`);
