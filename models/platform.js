@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const platformSchema = new Schema({
-  name: { type: String, required: true, maxLength: 100, minLength: 3 },
+  name: { type: String, required: true, maxLength: 100, minLength: 2 },
   icon: { type: String, required: false },
 });
 
