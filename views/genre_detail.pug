@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    main(class="main_content")
+        h1 Genre: #{genre.name}
+        br
+        div(style='margin-left:20px;margin-top:20px')
+            h1 Games
+            hr
+            br
+            div(class="game_cards_container")
+                each game in genre_games
+                    a(class="game_card" href= game.url style=game.picture)
+                        span(class="game_card_title")= game.title  
+                else
+                    //- p This genre has no games
+                a(class="game_card" style="--bg-image: url(/images/reddeadredemption.jpg)")
+                    span(class="game_card_title") Red Dead Redemption 2
+                a(class="game_card" style="--bg-image: url(/images/roguegalaxy.jpg)")
+                    span(class="game_card_title") Rouge Galaxy
+                a(class="game_card" style="--bg-image: url(/images/shadowofthecolssus.webp)")
+                    span(class="game_card_title") Shadow of The Colossus
