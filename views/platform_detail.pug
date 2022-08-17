@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    main(class="main_content")
+        h1 Platform: #{platform.name}
+        br
+        div(style='margin-left:20px;margin-top:20px')
+            h1 Games
+            hr
+            br
+            div(class="game_cards_container")
+                each game in platform_games
+                    a(class="game_card" href= game.url style= game.picture)
+                        span(class="game_card_title")= game.title  
+                else
+                    //- p This platform has no games
+                a(class="game_card" style="--bg-image: url(/images/xenogears.jpg)")
+                    span(class="game_card_title") Xenogears
+                a(class="game_card" style="--bg-image: url(/images/zelda.jpg)")
+                    span(class="game_card_title") Legend of Zelda Ocarina of Time
+                a(class="game_card" style="--bg-image: url(/images/zoneoftheenders.webp)")
+                    span(class="game_card_title") Zone of The Enders
+                
