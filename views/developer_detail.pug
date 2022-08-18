@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    main(class="main_content")
+        
+        br
+        div(class="developer_container")
+            img(class="developer_logo" src="/images/Santa_Monica_Studio.svg" alt="developer") 
+            div(class="developer_info")
+                h1 Summary
+                p(style="text-align: justify; font-size:16px" ) #{developer.summary}
+        
+        div(style='margin-left:20px;margin-top:20px')
+            h1 Games
+            hr
+            br
+            div(class="game_cards_container")
+                each game in developer_games
+                    a(class="game_card" href= game.url style= game.picture)
+                        span(class="game_card_title")= game.title  
+                else
+                    //- p This developer has no games
+                a(class="game_card" style="--bg-image: url(/images/silenthill.jpg)")
+                    span(class="game_card_title") Silent Hill 2
+                a(class="game_card" style="--bg-image: url(/images/skyrim.jpeg)")
+                    span(class="game_card_title") Elder Scrolls Skyrim
+                a(class="game_card" style="--bg-image: url(/images/supermario.jpg)")
+                    span(class="game_card_title") Super Mario 64
