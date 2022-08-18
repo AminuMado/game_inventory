@@ -1,4 +1,9 @@
+// Require Models
 const Developer = require("../models/developer");
+const Game = require("../models/game");
+
+// Require async
+const async = require("async");
 
 // Display list of All Developers
 exports.developer_list = (req, res) => {
@@ -15,8 +20,32 @@ exports.developer_list = (req, res) => {
 };
 
 // Display Detail page for a Specific Developer
-exports.developer_detail = (req, res) => {
-  res.send(`NOT IMPLEMENTED: Developer Detail: ${req.params.id}`);
+exports.developer_detail = (req, res, next) => {
+  async.parallel(
+    {
+      developer: function (callback) {
+        Developer.findById(req.params.id).exec(callback);
+      },
+      developer_games: function (callback) {
+        Game.find({ developer: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) next(err);
+      if (results.developer == null) {
+        // No results
+        const err = new Error("Developer not found");
+        err.status = 404;
+        return next(err);
+      }
+      // Succesful
+      res.render("developer_detail", {
+        title: "Developer Detail",
+        developer: results.developer,
+        developer_games: results.developer_games,
+      });
+    }
+  );
 };
 
 // Display Create Form on GET
