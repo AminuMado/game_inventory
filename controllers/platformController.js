@@ -34,7 +34,6 @@ exports.platform_detail = (req, res, next) => {
         return next(err);
       }
       // Successful, so render
-      console.log(results);
       res.render("platform_detail", {
         title: "Platform Detail",
         platform: results.platform,
