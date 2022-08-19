@@ -1,5 +1,8 @@
 //Require Review model
 const Review = require("../models/review");
+const Game = require("../models/game");
+// Require async
+const async = require("async");
 // Display list of All Review
 exports.review_list = (req, res) => {
   Review.find().exec((err, list_review) => {
@@ -13,7 +16,7 @@ exports.review_list = (req, res) => {
 };
 
 // Display Details for a Specific Review
-exports.review_detail = (req, res) => {
+exports.review_detail = (req, res, next) => {
   res.send(`NOT IMPLEMENTED: Review Detail ${req.params.id}`);
 };
 
