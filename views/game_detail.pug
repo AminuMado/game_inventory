@@ -1,1 +1,25 @@
 
+extends layout
+
+block content
+    main(class="main_content")
+        div(class="gameDetail_container")
+            img(class="gameDetail_image" src="/images/hollowknight.jpg" alt="game")
+            div(class="gameDetail_info")
+                h1 #{game.title} (#{game.releaseDate})
+                h2 directed by #{game.director} Hideo Kojima
+                h2 Two years after the events at Shadow Moses, Solid Snake infiltrates the United States' Marine Corps and sees that the government is trying to unleash Metal Gear upon the world. With the help of Otacon, Snake will expose Metal Gear to the world and try to save the world from the disaster that was the Shadow Moses Incident.
+                div
+                    h2 Developed by  
+                    a(class="gameDetail_card" style="--bg-image: url(/images/Konami_4th_logo_1.svg)")
+                div
+                    h2 Platforms
+                    a(class="platform") Playstation 2
+                div
+                    h2 Genre 
+                    a(class="genre") Action
+                    a(class="genre") Platform
+                h2 #{game.summary}
+                
+                
+            
