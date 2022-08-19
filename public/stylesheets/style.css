@@ -405,3 +405,58 @@ a.card {
   width: 250px;
   object-fit: contain;
 }
+/* Game Details */
+.gameDetail_container {
+  display: flex;
+  background-color: rgba(206, 193, 193, 0.363);
+  gap: 15px;
+  padding: 30px;
+  border-radius: 24px;
+  margin: 30px auto;
+  max-width: 1200px;
+}
+.gameDetail_image {
+  width: 25vw;
+  object-fit: contain;
+  min-width: 350px;
+  min-height: 600px;
+}
+.gameDetail_info {
+  display: grid;
+}
+.gameDetail_info div {
+  display: grid;
+  gap: 10px;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, 200px);
+}
+.gameDetail_info div > h2 {
+  grid-row: 1/3;
+}
+.gameDetail_card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 3em 1em;
+  transition: transform 200ms ease;
+  cursor: pointer;
+  filter: brightness(0.85);
+}
+.gameDetail_card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: var(--bg-image);
+}
+.gameDetail_card:hover {
+  transform: scale(1.05);
+  filter: brightness(1);
+}
