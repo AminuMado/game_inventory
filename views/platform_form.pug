@@ -1,0 +1,22 @@
+extends layout
+block content 
+    div.main_content
+        h1 #{title}
+        hr
+        br
+        div.form_box
+            form(method="POST" action="")
+                div.user_box
+                    input(type = "text" id="name" name="name" required
+                          placeholder = "PlayStation,Xbox,Switch etc."
+                          value=(undefined === platform ? "" : platform.name))
+                    label(for = "name") Name:
+                div.user_box
+                    input(type = "file" id="icon" name="icon")
+                    label(for = "icon") Icon:
+                button(type = "submit") Submit
+
+            if errors 
+                    ul 
+                        for error in errors
+                            li!= error.msg
