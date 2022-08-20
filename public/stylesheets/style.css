@@ -460,3 +460,15 @@ a.card {
   transform: scale(1.05);
   filter: brightness(1);
 }
+/* Review Section */
+
+.reviewDetail_container {
+  display: grid;
+  background-color: rgba(206, 193, 193, 0.363);
+  gap: 15px;
+  padding: 30px;
+  border-radius: 24px;
+  margin: 30px auto;
+  max-width: 1200px;
+  gap: 30px;
+}
