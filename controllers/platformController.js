@@ -3,6 +3,9 @@ const Platform = require("../models/platform");
 const Game = require("../models/game");
 // Require async
 const async = require("async");
+// Require body and validator
+const { body, validationResult } = require("express-validator");
+
 // Display List of all Platforms
 exports.platform_list = (req, res) => {
   Platform.find().exec((err, list_platform) => {
@@ -45,12 +48,46 @@ exports.platform_detail = (req, res, next) => {
 
 // Display Create Form on GET
 exports.platform_create_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Platform Create GET");
+  res.render("platform_form", { title: "Create Platform" });
 };
 // Handle Create on POST
-exports.platform_create_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: Platform Create POST");
-};
+exports.platform_create_post = [
+  // Validate and sanitize the name field.
+  body("name", "Platform name required").trim().isLength({ min: 1 }).escape(),
+  // Process request after validation and sanitization.
+  (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+    // Create a platform object with escaped and trimmed data.
+    const platform = new Platform({ name: req.body.name, icon: req.body.icon });
+    if (!errors.isEmpty()) {
+      // There are errors. Render the form again with sanitized vales/error messages.
+      res.render("platform_form", {
+        title: "Create Platform",
+        platform,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      // Data from the form is valid
+      // Check if Platform with same name already exists.
+      Platform.findOne({ name: req.body.name }).exec((err, found_platform) => {
+        if (err) return next(err);
+        if (found_platform) {
+          // Platform exists, redirect to its detail page.
+          res.redirect(found_platform.url);
+        } else {
+          // Everything is good we can finally save the created platform
+          platform.save((err) => {
+            if (err) return next(err);
+            // Platform saved. Redirect to platform detail page.
+            res.redirect(platform.url);
+          });
+        }
+      });
+    }
+  },
+];
 
 // Display Delete Form on GET
 exports.platform_delete_get = (req, res) => {
