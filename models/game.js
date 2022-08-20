@@ -15,9 +15,9 @@ const gameSchema = new Schema({
   pictures: [{ type: String, required: false }],
   director: { type: String, required: true },
   summary: { type: String, required: true },
-  platform: [{ type: Schema.Types.ObjectId, ref: "Platform", required: false }],
-  developer: { type: Schema.Types.ObjectId, ref: "Developer", required: false },
-  genre: { type: Schema.Types.ObjectId, ref: "Genre", required: false },
+  platform: [{ type: Schema.Types.ObjectId, ref: "Platform", required: true }],
+  developer: { type: Schema.Types.ObjectId, ref: "Developer", required: true },
+  genre: { type: Schema.Types.ObjectId, ref: "Genre", required: true },
 });
 
 //Virtual for game's URL

@@ -5,11 +5,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
-  game: { type: Schema.Types.ObjectId, ref: "Game", required: false },
+  game: { type: Schema.Types.ObjectId, ref: "Game", required: true },
   sourceSite: { type: String, required: true },
   content: { type: String, required: true },
   rating: { type: String, required: true },
-  link: { type: String, required: false },
+  link: { type: String, required: true },
 });
 
 //Virtual for review's URL
