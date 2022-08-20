@@ -472,3 +472,49 @@ a.card {
   max-width: 1200px;
   gap: 30px;
 }
+
+/* Form */
+.form_box {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  background-color: rgba(206, 193, 193, 0.363);
+  gap: 15px;
+  padding: 30px;
+  border-radius: 24px;
+  margin: 30px auto;
+  max-width: 900px;
+  gap: 30px;
+  min-width: 400px;
+}
+.form_box .user_box {
+  position: relative;
+}
+
+.form_box .user_box input {
+  width: 95%;
+  padding: 10px;
+  font-size: 20px;
+  color: #fff;
+  margin: 12px 12px 30px 12px;
+  border: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.form_box .user_box label {
+  position: absolute;
+  top: -30px;
+  left: 10px;
+  padding: 10px 0;
+  font-size: 20px;
+  color: var(--text-color);
+
+  transition: 0.5s;
+}
+.form_box .user_box input:focus {
+  border: 1px solid lightblue;
+}
+.form_box .user_box input:focus ~ label,
+.form_box .user_box input:valid ~ label {
+  color: lime;
+}
