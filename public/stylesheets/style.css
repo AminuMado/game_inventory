@@ -490,7 +490,9 @@ a.card {
 .form_box .user_box {
   position: relative;
 }
-
+.user_box_file {
+  position: relative;
+}
 .form_box .user_box input {
   width: 95%;
   padding: 10px;
@@ -501,6 +503,24 @@ a.card {
   outline: none;
   background: transparent;
 }
+.form_box .user_box_file input {
+  width: fit-content;
+  padding: 10px;
+  font-size: 20px;
+  color: #fff;
+  margin: 12px 12px 30px 12px;
+  outline: none;
+  background: transparent;
+}
+.form_box .user_box_file label {
+  position: absolute;
+  top: -30px;
+  left: 10px;
+  padding: 10px 0;
+  font-size: 20px;
+  color: var(--text-color);
+  transition: 0.5s;
+}
 .form_box .user_box label {
   position: absolute;
   top: -30px;
@@ -508,7 +528,6 @@ a.card {
   padding: 10px 0;
   font-size: 20px;
   color: var(--text-color);
-
   transition: 0.5s;
 }
 .form_box .user_box input:focus {
