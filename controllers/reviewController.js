@@ -17,7 +17,18 @@ exports.review_list = (req, res) => {
 
 // Display Details for a Specific Review
 exports.review_detail = (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: Review Detail ${req.params.id}`);
+  Review.findById(req.params.id)
+    .populate("game")
+    .exec((err, result) => {
+      if (err) return next(err);
+      if (result === null) {
+        const err = new Error("Review not Found");
+        err.status = 404;
+        return next(err);
+      }
+      // sucessfull
+      res.render("review_detail", { title: "Review Detail", review: result });
+    });
 };
 
 // Display Create Form on GET
