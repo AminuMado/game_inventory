@@ -41,7 +41,7 @@ router.get("/games", game_controller.game_list);
 // Get Request for Creating a Developer NOTE This must come before routes that display developer (uses id)
 router.get("/developer/create", developer_controller.developer_create_get);
 // Post Request for Creating a Developer
-router.get("/developer/create", developer_controller.developer_create_post);
+router.post("/developer/create", developer_controller.developer_create_post);
 
 // Get Request for Deleting a Developer
 router.get("/developer/:id/delete", developer_controller.developer_delete_get);
