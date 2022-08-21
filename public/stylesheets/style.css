@@ -479,22 +479,27 @@ a.card {
   box-sizing: border-box;
   display: grid;
   background-color: rgba(206, 193, 193, 0.363);
-  gap: 15px;
   padding: 30px;
   border-radius: 24px;
   margin: 30px auto;
   max-width: 900px;
   gap: 30px;
-  min-width: 400px;
+  min-width: 550px;
 }
-.form_box .user_box {
+.form_item {
   position: relative;
 }
-.user_box_file {
-  position: relative;
+.form_item label {
+  position: absolute;
+  top: -30px;
+  left: 10px;
+  padding: 10px 0;
+  font-size: 20px;
+  color: var(--text-color);
+  transition: 0.5s;
 }
-.form_box .user_box input {
-  width: 95%;
+.form_item input {
+  width: 90%;
   padding: 10px;
   font-size: 20px;
   color: #fff;
@@ -503,7 +508,10 @@ a.card {
   outline: none;
   background: transparent;
 }
-.form_box .user_box_file input {
+.form_item_file {
+  position: relative;
+}
+.form_item_file input {
   width: fit-content;
   padding: 10px;
   font-size: 20px;
@@ -512,7 +520,7 @@ a.card {
   outline: none;
   background: transparent;
 }
-.form_box .user_box_file label {
+.form_item_file label {
   position: absolute;
   top: -30px;
   left: 10px;
@@ -521,25 +529,32 @@ a.card {
   color: var(--text-color);
   transition: 0.5s;
 }
-.form_box .user_box label {
-  position: absolute;
-  top: -30px;
-  left: 10px;
-  padding: 10px 0;
-  font-size: 20px;
-  color: var(--text-color);
-  transition: 0.5s;
-}
-.form_box .user_box input:focus {
+
+.form_item input:focus {
   border: 1px solid lightblue;
 }
-.form_box .user_box input:focus ~ label,
-.form_box .user_box input:valid ~ label {
+.form_item input:focus ~ label,
+.form_item input:valid ~ label {
   color: lime;
+}
+.form_item_list label {
+  font-size: 20px;
+}
+.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px);
+  margin: 8px;
+  justify-content: center;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 20px;
 }
 
 textarea {
-  width: 95%;
+  width: 90%;
   height: 100px;
   margin: 20px;
   padding: 10px;
