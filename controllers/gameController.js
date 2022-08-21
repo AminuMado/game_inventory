@@ -4,6 +4,7 @@ const Developer = require("../models/developer");
 const Platform = require("../models/platform");
 const Review = require("../models/review");
 const async = require("async");
+const { body, validationResult } = require("express-validator");
 //Display Home Page
 exports.home_page = (req, res) => {
   async.parallel(
@@ -60,8 +61,28 @@ exports.game_detail = (req, res, next) => {
 };
 
 // Display Game Create form on GET
-exports.game_create_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Game Create GET");
+exports.game_create_get = (req, res, next) => {
+  // Get all developers, platforms and genres which we need before we can create a game
+  async.parallel({
+    developers: function (callback) {
+      Developer.find(callback);
+    },
+    platforms: function (callback) {
+      Platform.find(callback);
+    },
+    genres: function (callback) {
+      Genre.find(callback);
+    },
+  }),
+    (err, results) => {
+      if (err) return next(err);
+      res.render("game_form", {
+        title: "Create Game",
+        developers: results.developers,
+        platforms: results.platforms,
+        genres: results.genres,
+      });
+    };
 };
 
 // Handle Game Create on POST
