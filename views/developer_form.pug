@@ -1,0 +1,30 @@
+extends layout
+block content 
+    div.main_content
+        h1 #{title}
+        hr
+        br
+        div.form_box
+            form(method="POST" action="")
+                div.user_box
+                    input(type = "text" id="name" name="name" 
+                          placeholder = "Santa Monica Studios, Konami, Electronic Arts, Naughty Dog etc."
+                          value=(undefined === developer ? "" : developer.name))
+                    label(for = "name") Name:
+                div.user_box
+                    input(type = "number" id="founded" name="founded" 
+                          placeholder = "eg. 2000"
+                          value=(undefined === developer ? "" : developer.founded))
+                    label(for = "founded") Founded:
+                div.user_box
+                    textarea(id="summary" name="summary") #{undefined === developer ? "" : developer.summary}
+                    label(for = "summary") Summary:        
+                div.user_box_file
+                    input(type = "file" id="icon" name="icon")
+                    label(for = "icon") Icon:
+                button(type = "submit") Submit
+
+            if errors 
+                    ul 
+                        for error in errors
+                            li!= error.msg
