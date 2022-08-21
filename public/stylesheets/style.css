@@ -537,3 +537,10 @@ a.card {
 .form_box .user_box input:valid ~ label {
   color: lime;
 }
+
+textarea {
+  width: 95%;
+  height: 100px;
+  margin: 20px;
+  padding: 10px;
+}
