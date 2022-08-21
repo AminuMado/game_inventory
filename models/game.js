@@ -5,19 +5,19 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const gameSchema = new Schema({
-  title: { type: String, maxLength: 100, minLength: 3, required: true },
+  name: { type: String, maxLength: 100, minLength: 3, required: true },
   releaseDate: {
     type: Number,
     min: [1958, "Really? Earlier than Tennis for Two?"],
     max: 2099,
     required: true,
   },
-  pictures: [{ type: String, required: false }],
+  photo: { type: String, required: false },
   director: { type: String, required: true },
   summary: { type: String, required: true },
-  platform: [{ type: Schema.Types.ObjectId, ref: "Platform", required: true }],
   developer: { type: Schema.Types.ObjectId, ref: "Developer", required: true },
-  genre: { type: Schema.Types.ObjectId, ref: "Genre", required: true },
+  platform: [{ type: Schema.Types.ObjectId, ref: "Platform", required: true }],
+  genre: [{ type: Schema.Types.ObjectId, ref: "Genre", required: true }],
 });
 
 //Virtual for game's URL
