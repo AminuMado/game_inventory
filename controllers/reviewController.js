@@ -32,8 +32,12 @@ exports.review_detail = (req, res, next) => {
 };
 
 // Display Create Form on GET
-exports.review_create_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Review Create GET");
+exports.review_create_get = (req, res, next) => {
+  Game.find().exec((err, result) => {
+    if (err) return next(err);
+    // Successful
+    res.render("review_form", { title: "Create Review", games: result });
+  });
 };
 // Handle Create on POST
 exports.review_create_post = (req, res) => {
