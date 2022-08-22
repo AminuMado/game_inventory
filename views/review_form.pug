@@ -1,0 +1,38 @@
+extends layout
+block content 
+    div.main_content
+        h1 #{title}
+        hr
+        br
+        div.form_box
+            form(method="POST" action="")
+                div.form_item
+                    label(for='game') Game:
+                    select(type='select', placeholder='Select Game' name='game' required='true' )
+                        - games.sort()
+                        for game in games
+                            if review
+                                option(value=game._id selected=(game._id.toString() === review.game._id.toString() ? 'selected' : false) ) #{game.name}
+                            else
+                                option(value=game._id) #{game.name}
+                div.form_item
+                    label(for = "snippet") Snippet:
+                    input(type = "text" id="snippet" name="snippet" required
+                          placeholder = "An awesome game, ahead of its time."
+                          value=(undefined === review ? "" : review.snippet))
+                div.form_item
+                    label(for = "sourceSite") Source Site:
+                    input(type = "text" id="sourceSite" name="sourceSite" required
+                          placeholder = " IGN, Gamespot ... etc"
+                          value=(undefined === review ? "" : review.sourceSite))
+                div.form_item
+                    label(for = "link") Link:
+                    input(type = "text" id="link" name="link" required
+                          placeholder = "www.ign.com/awesome_game_review"
+                          value=(undefined === review ? "" : review.link))
+                
+                button(type = "submit") Submit
+            if errors 
+                    ul 
+                        for error in errors
+                            li!= error.msg
