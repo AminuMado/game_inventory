@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 const reviewSchema = new Schema({
   game: { type: Schema.Types.ObjectId, ref: "Game", required: true },
   sourceSite: { type: String, required: true },
-  content: { type: String, required: true },
+  snippet: { type: String, required: true },
   rating: { type: String, required: true },
   link: { type: String, required: true },
 });
