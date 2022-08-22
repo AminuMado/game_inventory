@@ -508,6 +508,14 @@ a.card {
   outline: none;
   background: transparent;
 }
+.form_item select {
+  width: 93%;
+  padding: 10px;
+  font-size: 20px;
+  margin: 12px 12px 30px 12px;
+  border: 1px solid #fff;
+  outline: none;
+}
 .form_item_file {
   position: relative;
 }
@@ -536,6 +544,9 @@ a.card {
 .form_item input:focus ~ label,
 .form_item input:valid ~ label {
   color: lime;
+}
+.form_item_list {
+  margin: 20px;
 }
 .form_item_list label {
   font-size: 20px;
