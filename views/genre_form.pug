@@ -6,11 +6,11 @@ block content
         br
         div.form_box
             form(method="POST" action="")
-                div.user_box
+                div.form_item
+                    label(for = "name") Genre:
                     input(type = "text" id="name" name="name" required
                           placeholder = "Fantasy, Action RPG, First Person Shooter, Platform etc."
                           value=(undefined === genre ? "" : genre.name))
-                    label(for = "name") Genre:
                 button(type = "submit") Submit
             if errors 
                     ul 
