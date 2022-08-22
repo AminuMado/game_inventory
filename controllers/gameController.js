@@ -172,6 +172,7 @@ exports.game_create_post = [
           res.render("game_form", {
             title: "Create Game",
             game,
+            developers: results.developers,
             platforms: results.platforms,
             genres: results.genres,
             errors: errors.array(),
