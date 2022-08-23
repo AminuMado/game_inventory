@@ -111,14 +111,15 @@ exports.developer_create_post = [
 
 // Display Delete Form on GET
 exports.developer_delete_get = (req, res, next) => {
-  async.parallel({
-    developer: function (callback) {
-      Developer.findById(req.params.id).exec(callback);
+  async.parallel(
+    {
+      developer: function (callback) {
+        Developer.findById(req.params.id).exec(callback);
+      },
+      developer_games: function (callback) {
+        Game.find({ developer: req.params.id }).exec(callback);
+      },
     },
-    developer_games: function (callback) {
-      Game.find({ developer: req.params.id }).exec(callback);
-    },
-  }),
     (err, results) => {
       if (err) return next(err);
       if (results.developer == null) {
@@ -131,19 +132,21 @@ exports.developer_delete_get = (req, res, next) => {
         developer: results.developer,
         developer_games: results.developer_games,
       });
-    };
+    }
+  );
 };
 
 // Handle Delete on POST
 exports.developer_delete_post = (req, res, next) => {
-  async.parallel({
-    developer: function (callback) {
-      Developer.findById(req.params.id).exec(callback);
+  async.parallel(
+    {
+      developer: function (callback) {
+        Developer.findById(req.params.id).exec(callback);
+      },
+      developer_games: function (callback) {
+        Game.findById({ developer: req.params.id }).exec(callback);
+      },
     },
-    developer_games: function (callback) {
-      Game.findById({ developer: req.params.id }).exec(callback);
-    },
-  }),
     (err, results) => {
       if (err) return next(err);
       // Success, we now check if the developer has games associated with it
@@ -162,7 +165,8 @@ exports.developer_delete_post = (req, res, next) => {
         // Success - go to developer list
         res.redirect("/developers");
       });
-    };
+    }
+  );
 };
 
 // Display Update Form on GET
