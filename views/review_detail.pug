@@ -4,12 +4,12 @@ block content
     main(class="main_content")
         div(class="reviewDetail_container")
             h2 Review of : 
-                a(href="#") Metal Gear Solid 2
-            h2 by IGN
-            h2 Rating: 10/10
+                a(href=review.game.url) #{review.game.name} 
+            h2 by #{review.sourceSite}
+            h2 Rating: #{review.rating}
             h2 Snippet
-            p Metal Gear was a game ahead of its time.
-            a(href="#") See the whole review (in a new tab) &#8594
+            p #{review.snippet}
+            a(href=review.link) See the whole review (in a new tab) &#8594
                
                 
                 
