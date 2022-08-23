@@ -21,14 +21,19 @@ block content
                           placeholder = "An awesome game, ahead of its time."
                           value=(undefined === review ? "" : review.snippet))
                 div.form_item
+                    label(for = "rating") Rating:
+                    input(type = "text" id="rating" name="rating" required
+                          placeholder = "eg. 8/10"
+                          value=(undefined === review ? "" : review.rating))
+                div.form_item
                     label(for = "sourceSite") Source Site:
                     input(type = "text" id="sourceSite" name="sourceSite" required
                           placeholder = " IGN, Gamespot ... etc"
                           value=(undefined === review ? "" : review.sourceSite))
                 div.form_item
                     label(for = "link") Link:
-                    input(type = "text" id="link" name="link" required
-                          placeholder = "www.ign.com/awesome_game_review"
+                    input(type = "url" id="link" name="link" required
+                          placeholder = "https://www.example.com"
                           value=(undefined === review ? "" : review.link))
                 
                 button(type = "submit") Submit
