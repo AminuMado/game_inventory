@@ -17,7 +17,7 @@ block content
             div(class="game_cards_container")
                 each game in developer_games
                     a(class="game_card" href= game.url style= game.picture)
-                        span(class="game_card_title")= game.title  
+                        span(class="game_card_title")= game.name  
                 else
                     //- p This developer has no games
                 a(class="game_card" style="--bg-image: url(/images/silenthill.jpg)")
@@ -26,3 +26,6 @@ block content
                     span(class="game_card_title") Elder Scrolls Skyrim
                 a(class="game_card" style="--bg-image: url(/images/supermario.jpg)")
                     span(class="game_card_title") Super Mario 64
+        hr
+        button
+            a(href=developer.url+'/delete') Delete
