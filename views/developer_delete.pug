@@ -1,0 +1,19 @@
+extends layout 
+block content
+    main(class="main_content")
+        h1 #{title}:#{developer.name}
+        if developer_games.length
+            p #[strong Delete the following games before attempting to delete this developer.]
+            div(style='margin-left:20px;margin-top:20px')
+                h1 Games
+                hr
+                br
+                div(class="game_cards_container")
+                    each game in developer_games 
+                        a(href=game.url class="game_card" style="--bg-image: url(/images/mgs2.png)")
+                            span(class="game_card_title") #{game.name}
+        else 
+            p Do you really want to delete this Developer?
+            form(method= "POST" action='')
+                input(id=developer._id type='hidden' name=developer._id required="true" value=developer._id)
+                button(type = "submit") Delete
