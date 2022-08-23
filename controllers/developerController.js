@@ -110,17 +110,63 @@ exports.developer_create_post = [
 ];
 
 // Display Delete Form on GET
-exports.developer_delete_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Developer Delete GET");
+exports.developer_delete_get = (req, res, next) => {
+  async.parallel({
+    developer: function (callback) {
+      Developer.findById(req.params.id).exec(callback);
+    },
+    developer_games: function (callback) {
+      Game.find({ developer: req.params.id }).exec(callback);
+    },
+  }),
+    (err, results) => {
+      if (err) return next(err);
+      if (results.developer == null) {
+        // No results.
+        res.redirect("/developers");
+      }
+      // Successful so render.
+      res.render("developer_delete", {
+        title: "Delete Developer",
+        developer: results.developer,
+        developer_games: results.developer_games,
+      });
+    };
 };
 
 // Handle Delete on POST
-exports.developer_delete_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: Developer Delete POST");
+exports.developer_delete_post = (req, res, next) => {
+  async.parallel({
+    developer: function (callback) {
+      Developer.findById(req.params.id).exec(callback);
+    },
+    developer_games: function (callback) {
+      Game.findById({ developer: req.params.id }).exec(callback);
+    },
+  }),
+    (err, results) => {
+      if (err) return next(err);
+      // Success, we now check if the developer has games associated with it
+      if (results.developer_games.length > 0) {
+        // Developer has games so we Render in way as for GET route.
+        res.render("developer_delete", {
+          title: "Delete Developer",
+          developer: results.developer,
+          developer_games: results.developer_games,
+        });
+        return;
+      }
+      // Developer has no games. We can now delete the developer
+      Developer.findByIdAndRemove(req.body.developerid, (err) => {
+        if (err) return next(err);
+        // Success - go to developer list
+        res.redirect("/developers");
+      });
+    };
 };
 
 // Display Update Form on GET
-exports.developer_update_get = (req, res) => {
+exports.developer_update_get = (req, res, next) => {
   res.send("NOT IMPLEMENTED: Developer Update GET");
 };
 
