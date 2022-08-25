@@ -1,0 +1,17 @@
+extends layout 
+block content
+    main(class="main_content")
+        h1 #{title}:#{game.name}
+        if game_reviews.length
+            p #[strong Delete the following reviews before attempting to delete this game.]
+            div(style='margin-left:20px;margin-top:20px')
+                h1 Reviews
+                hr
+                br
+                each review in game_reviews 
+                    a(href=review.url) from: #{review.sourceSite}
+        else 
+            p Do you really want to delete this game?
+            form(method= "POST" action='')
+                input(id= "gameId" type='hidden' name= "gameId" required="true" value= game._id)
+                button(type = "submit") Delete
