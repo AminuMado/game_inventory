@@ -90,12 +90,62 @@ exports.platform_create_post = [
 ];
 
 // Display Delete Form on GET
-exports.platform_delete_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Platfrom Delete GET");
+exports.platform_delete_get = (req, res, next) => {
+  async.parallel(
+    {
+      platform: function (callback) {
+        Platform.findById(req.params.id).exec(callback);
+      },
+      platform_games: function (callback) {
+        Game.find({ platform: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) return next(err);
+      if (results.platform == null) {
+        // No results
+        res.redirect("/platforms");
+      }
+      // Succesful so render
+      res.render("platform_delete", {
+        title: "Delete Platform",
+        platform: results.platform,
+        platform_games: results.platform_games,
+      });
+    }
+  );
 };
 // Handle Delete on POST
-exports.platform_delete_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: Platform Delete POST");
+exports.platform_delete_post = (req, res, next) => {
+  async.parallel(
+    {
+      platform: function (callback) {
+        Platform.findById(req.params.id).exec(callback);
+      },
+      platform_games: function (callback) {
+        Game.find({ platform: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) return next(err);
+      // Success we now check if the platform has games associated with it
+      if (results.platform_games.length > 0) {
+        // Platform has games associated with it so we rerender
+        res.render("platform_delete", {
+          title: "Delete Platform",
+          platform: results.platform,
+          platform_games: results.platform_games,
+        });
+        return;
+      }
+      // Platform has no games. We can now delete the platform
+      Platform.findByIdAndRemove(req.body.platformId, (err) => {
+        if (err) return next(err);
+        // Success... Platform has been deeted, go to platform list
+        res.redirect("/platforms");
+      });
+    }
+  );
 };
 
 // Display Update Form on GET

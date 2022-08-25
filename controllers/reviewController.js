@@ -104,12 +104,21 @@ exports.review_create_post = [
 ];
 
 // Display Delete Form on GET
-exports.review_delete_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Review Delete GET");
+exports.review_delete_get = (req, res, next) => {
+  Review.findById(req.params.id).exec((err, review) => {
+    if (err) return next(err);
+    if (review == null) res.redirect("/reviews");
+    // Succesful so render
+    res.render("review_delete", { title: "Delete Review", review });
+  });
 };
 // Handle Delete on POST
-exports.review_delete_post = (req, res) => {
-  res.send("NOT IMPLMENTED:Review Delete POST");
+exports.review_delete_post = (req, res, next) => {
+  Review.findByIdAndRemove(req.body.reviewId, (err) => {
+    if (err) return next(err);
+    // Success... Review has been deleted, go to the review list
+    res.redirect("/reviews");
+  });
 };
 
 // Display Update Form on GET

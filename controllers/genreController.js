@@ -96,13 +96,63 @@ exports.genre_create_post = [
 ];
 
 // Display Delete Form on Get
-exports.genre_delete_get = (req, res) => {
-  res.send("NOT IMPLMENTED: Genre Delete GET");
+exports.genre_delete_get = (req, res, next) => {
+  async.parallel(
+    {
+      genre: function (callback) {
+        Genre.findById(req.params.id).exec(callback);
+      },
+      genre_games: function (callback) {
+        Game.find({ genre: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) return next(err);
+      if (results.genre == null) {
+        // No results
+        res.redirect("/genres");
+      }
+      // Succesful so render
+      res.render("genre_delete", {
+        title: "Delete Genre",
+        genre: results.genre,
+        genre_games: results.genre_games,
+      });
+    }
+  );
 };
 
 // Handle Delete on POST
-exports.genre_delete_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: Genre Delete POST");
+exports.genre_delete_post = (req, res, next) => {
+  async.parallel(
+    {
+      genre: function (callback) {
+        Genre.findById(req.params.id).exec(callback);
+      },
+      genre_games: function (callback) {
+        Game.find({ genre: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) return next(err);
+      // Success, we now check if the genre has games associated with it
+      if (results.genre_games.length > 0) {
+        // Genre has games associated with it
+        res.render("genre_delete", {
+          title: "Delete Genre",
+          genre: results.genre,
+          genre_games: results.genre_games,
+        });
+        return;
+      }
+      // Genre has no games. We can now delete the genre
+      Genre.findByIdAndRemove(req.body.genreId, (err) => {
+        if (err) return next(err);
+        // Success... Genre has been deleted, go to genre list
+        res.redirect("/genres");
+      });
+    }
+  );
 };
 
 // Display Update Form on GET

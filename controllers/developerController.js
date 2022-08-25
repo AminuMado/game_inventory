@@ -144,7 +144,7 @@ exports.developer_delete_post = (req, res, next) => {
         Developer.findById(req.params.id).exec(callback);
       },
       developer_games: function (callback) {
-        Game.findById({ developer: req.params.id }).exec(callback);
+        Game.find({ developer: req.params.id }).exec(callback);
       },
     },
     (err, results) => {
@@ -160,9 +160,9 @@ exports.developer_delete_post = (req, res, next) => {
         return;
       }
       // Developer has no games. We can now delete the developer
-      Developer.findByIdAndRemove(req.body.developerid, (err) => {
+      Developer.findByIdAndRemove(req.body.developerId, (err) => {
         if (err) return next(err);
-        // Success - go to developer list
+        // Success... Developer has been deleted, go to the developer list
         res.redirect("/developers");
       });
     }
