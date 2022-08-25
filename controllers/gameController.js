@@ -403,10 +403,10 @@ exports.game_update_post = [
       return;
     }
     // Data from form is valid. Update the record.
-    Game.findByIdAndUpdate(req.params.id, book, {}, (err, thegame) => {
+    Game.findByIdAndUpdate(req.params.id, game, {}, (err, updatedgame) => {
       if (err) return next(err);
       // Successfull ... redirect to game detail page
-      res.redirect(thegame.url);
+      res.redirect(updatedgame.url);
     });
   },
 ];
