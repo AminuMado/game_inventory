@@ -1,0 +1,8 @@
+extends layout 
+block content
+    main(class="main_content")
+        h1 #{title}:#{review.name} 
+            p Do you really want to delete this Review?
+            form(method= "POST" action='')
+                input(id= "reviewId" type='hidden' name= "reviewId" required="true" value= review._id)
+                button(type = "submit") Delete
