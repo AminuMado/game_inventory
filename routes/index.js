@@ -75,7 +75,7 @@ router.post("/platform/create", platform_controller.platform_create_post);
 // Get Request to Delete a Platform
 router.get("/platform/:id/delete", platform_controller.platform_delete_get);
 // Post Request to Delete a Platform
-router.get("/platform/:id/delete", platform_controller.platform_delete_post);
+router.post("/platform/:id/delete", platform_controller.platform_delete_post);
 
 // Get Request to Update a Platform
 router.get("/platform/:id/update", platform_controller.platform_update_get);
