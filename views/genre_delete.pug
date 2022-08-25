@@ -1,0 +1,19 @@
+extends layout 
+block content
+    main(class="main_content")
+        h1 #{title}:#{genre.name}
+        if genre_games.length
+            p #[strong Delete the following games before attempting to delete this genre.]
+            div(style='margin-left:20px;margin-top:20px')
+                h1 Games
+                hr
+                br
+                div(class="game_cards_container")
+                    each game in genre_games 
+                        a(href=game.url class="game_card" style="--bg-image: url(/images/mgs2.png)")
+                            span(class="game_card_title") #{game.name}
+        else 
+            p Do you really want to delete this Genre?
+            form(method= "POST" action='')
+                input(id= "genreId" type='hidden' name = "genreId" required="true" value = genre._id)
+                button(type = "submit") Delete
