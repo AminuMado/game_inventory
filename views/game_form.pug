@@ -27,7 +27,7 @@ block content
                         - developers.sort()
                         for developer in developers
                             if game
-                                option(value=developer._id selected=(developer._id.toString() === game.developer._id.toString() ? 'selected' : false) ) #{developer.name}
+                                option(value=developer._id selected=(developer._id.toString() == game.developer._id.toString() ? 'selected' : false) ) #{developer.name}
                             else
                                 option(value=developer._id) #{developer.name}
                 div.form_item
