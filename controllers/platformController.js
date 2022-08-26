@@ -149,10 +149,54 @@ exports.platform_delete_post = (req, res, next) => {
 };
 
 // Display Update Form on GET
-exports.platform_update_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Platform Update GET");
+exports.platform_update_get = (req, res, next) => {
+  // Get the platform in question adn populate its fields with its data
+  Platform.findById(req.params.id).exec((err, platform) => {
+    if (err) return next(err);
+    if (platform == null) {
+      // No results
+      const err = new Error("Platform not Found");
+      err.status = 404;
+      return next(err);
+    }
+    // Success render form with platform details
+    res.render("platform_form", { title: "Update Platform", platform });
+  });
 };
 // Handle Update on POST
-exports.platform_update_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: Platform Update POST");
-};
+exports.platform_update_post = [
+  // Validate and sanitize the name field.
+  body("name", "Platform name required").trim().isLength({ min: 1 }).escape(),
+  // Process request after validation and sanitization.
+  (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+    // Create a platform object with escaped and trimmed data and old id.
+    const platform = new Platform({
+      name: req.body.name,
+      icon: req.body.icon,
+      _id: req.params.id, // This is required or a new ID will be created
+    });
+    if (!errors.isEmpty()) {
+      // There are errors. Render the form again with sanitized vales/error messages.
+      res.render("platform_form", {
+        title: "Update Platform",
+        platform,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      // Data is valid we can now update the platform
+      Platform.findByIdAndUpdate(
+        req.params.id,
+        platform,
+        {},
+        (err, updatedPlatform) => {
+          if (err) return next(err);
+          // Successfull ... redirect to platform page
+          res.redirect(updatedPlatform.url);
+        }
+      );
+    }
+  },
+];
