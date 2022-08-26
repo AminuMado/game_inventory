@@ -56,7 +56,7 @@ exports.genre_create_get = (req, res, next) => {
   res.render("genre_form", { title: "Create Genre" });
 };
 
-// Handle Create  on POST
+// Handle Create Form on POST
 exports.genre_create_post = [
   // Validate and sanitize the name field.
   body("name", "Genre name required").trim().isLength({ min: 1 }).escape(),
@@ -156,10 +156,48 @@ exports.genre_delete_post = (req, res, next) => {
 };
 
 // Display Update Form on GET
-exports.genre_update_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Genre Update GET");
+exports.genre_update_get = (req, res, next) => {
+  // Get the genre and poplulate its fields with its values
+  Genre.findById(req.params.id).exec((err, genre) => {
+    if (err) return next(err);
+    if (genre == null) {
+      // No results
+      const err = new Error("Genre not found");
+      err.status = 404;
+      return next(err);
+    }
+    // Success render form with genre details
+    res.render("genre_form", { title: "Update Genre", genre });
+  });
 };
 // Handle Update on POST
-exports.genre_update_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: Genre Update POST");
-};
+exports.genre_update_post = [
+  // Validate and sanitize the name field.
+  body("name", "Genre name required").trim().isLength({ min: 1 }).escape(),
+  //Process request after validation and sanitization.
+  (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+    // Create a genre object with escaped and trimmed data and old id
+    const genre = new Genre({
+      name: req.body.name,
+      _id: req.params.id, // This is required or a new ID will be created
+    });
+    if (!errors.isEmpty()) {
+      // There are errors. Render the form again with sanitized vales/error messages.
+      res.render("genre_form", {
+        title: "Update Genre",
+        genre,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      // Data is valid we can update the genre
+      Genre.findByIdAndUpdate(req.params.id, genre, {}, (err, updatedGenre) => {
+        if (err) return next(err);
+        // Successfull .... redirect to genre detail page
+        res.redirect(updatedGenre.url);
+      });
+    }
+  },
+];
