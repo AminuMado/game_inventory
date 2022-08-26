@@ -171,10 +171,65 @@ exports.developer_delete_post = (req, res, next) => {
 
 // Display Update Form on GET
 exports.developer_update_get = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Developer Update GET");
+  // Get the developer in question and populate its fields with the data
+  Developer.findById(req.params.id).exec((err, developer) => {
+    if (err) return next(err);
+    if (developer == null) {
+      // No results
+      const err = new Error("Developer not found");
+      err.status = 404;
+      return next(err);
+    }
+    // Success render form with developer details
+    res.render("developer_form", { title: "Update Developer", developer });
+  });
 };
 
 // Handle Update on POST
-exports.developer_update_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: DeveloperUpdate POST");
-};
+exports.developer_update_post = [
+  // Validate and santize the name field.
+  body("name", "Developer name required").trim().isLength({ min: 1 }).escape(),
+  // Validate and sanitize the summary field.
+  body("summary", "Developer summary required")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  // Validate and sanitize the founded field.
+  body("founded", "Developer established date is required")
+    .isLength({ min: 4 })
+    .escape(),
+  // Process request after validation and sanitization.
+  (req, res, next) => {
+    // Extract the validation errors from a request
+    const errors = validationResult(req);
+    // Create a developer object with escaped/trimmed data and old id.
+    const developer = new Developer({
+      name: req.body.name,
+      founded: req.body.founded,
+      summary: req.body.summary,
+      icon: req.body.icon,
+      _id: req.params.id, // This is required or a new ID will be created
+    });
+    if (!errors.isEmpty()) {
+      // There are errors. Render the form again with sanitized values/error messages.
+      res.render("developer_form", {
+        title: "Update Developer",
+        developer,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      // Data is valid we can now update the developer
+      Developer.findByIdAndUpdate(
+        req.params.id,
+        developer,
+        {},
+        (err, updatedDeveloper) => {
+          if (err) return next(err);
+          // Succesfull .... redirect to developer detail page
+          res.redirect(updatedDeveloper.url);
+        }
+      );
+    }
+  },
+];
