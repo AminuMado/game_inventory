@@ -122,11 +122,94 @@ exports.review_delete_post = (req, res, next) => {
 };
 
 // Display Update Form on GET
-exports.review_update_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Review Update GET");
+exports.review_update_get = (req, res, next) => {
+  async.parallel(
+    {
+      review: function (callback) {
+        Review.findById(req.params.id).exec(callback);
+      },
+      games: function (callback) {
+        Game.find().exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) return next(err);
+      if (results.review == null) {
+        // No results
+        const err = new Error("Review not found");
+        err.status = 404;
+        return next(err);
+      }
+      res.render("review_form", {
+        title: "Update Review",
+        review: results.review,
+        games: results.games,
+      });
+    }
+  );
 };
 
 // Handle Update on POST
-exports.review_update_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: Review Update POST");
-};
+exports.review_update_post = [
+  // Validate and sanitize fields
+  body("snippet", "Snippet must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+
+  body("sourceSite", "Source Site must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("link", "link must not be empty").trim().isLength({ min: 1 }).escape(),
+  body("rating", "Rating must not be empty.")
+    .trim()
+    .isLength({ min: 3 })
+    .escape(),
+  body("game.*").escape(),
+
+  //Process request after validation and sanitization
+  (req, res, next) => {
+    // Get unescaped versions of sanitized links
+    let unescapedLink = req.body.link.replace(/&#x2F;/g, "/");
+    let unescapedRating = req.body.rating.replace(/&#x2F;/g, "/");
+    let unescapedSnippet = req.body.snippet.replace(/&#x27;/g, "'");
+    // Extract the validation errors from a request
+    const errors = validationResult(req);
+    // Create a review object with escaped and trimmed data and old Id
+    const review = new Review({
+      game: req.body.game,
+      snippet: unescapedSnippet,
+      sourceSite: req.body.sourceSite,
+      rating: unescapedRating,
+      link: unescapedLink,
+      _id: req.params.id, //This is required or a new ID will be created
+    });
+    if (!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values/error messages
+      // Get all games for form.
+      Game.find().exec((err, games) => {
+        if (err) return next(err);
+        // Succesfull
+        res.render("review_form", {
+          title: "Update Review",
+          review,
+          games,
+          errors: errors.array(),
+        });
+      });
+      return;
+    }
+    // Data from form is valid. Update Review
+    Review.findByIdAndUpdate(
+      req.params.id,
+      review,
+      {},
+      (err, updatedReview) => {
+        if (err) return next(err);
+        // Successful ..... redirect to review page
+        res.redirect(updatedReview.url);
+      }
+    );
+  },
+];
