@@ -8,7 +8,7 @@ const developerSchema = new Schema({
   name: { type: String, required: true, maxLength: 100, minLength: 3 },
   founded: { type: Number, required: true },
   summary: { type: String, required: true },
-  logo: { type: String, required: false },
+  icon: { type: String, required: false },
 });
 
 //Virtual property
