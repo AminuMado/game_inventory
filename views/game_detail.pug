@@ -4,23 +4,27 @@ extends layout
 block content
     main(class="main_content")
         div(class="gameDetail_container")
-            img(class="gameDetail_image" src="/images/hollowknight.jpg" alt="game")
-            div(class="gameDetail_info")
-                h1 #{game.title} (#{game.releaseDate})
-                h2 directed by #{game.director} Hideo Kojima
-                h2 Two years after the events at Shadow Moses, Solid Snake infiltrates the United States' Marine Corps and sees that the government is trying to unleash Metal Gear upon the world. With the help of Otacon, Snake will expose Metal Gear to the world and try to save the world from the disaster that was the Shadow Moses Incident.
-                div
+            img(class="gameDetail_image" src=game.photo alt="game")
+            div(class="gameDetail__info")
+                h1 #{game.name} (#{game.releaseDate})
+                h2 directed by #{game.director}
+                h2 !{game.summary}
+                div.gameDetail__developer
                     h2 Developed by  
-                    a(class="gameDetail_card" style="--bg-image: url(/images/Konami_4th_logo_1.svg)")
-                div
+                    a(href=game.developer.url)
+                        img.gameDetail__developer__icon(src=game.developer.icon)
+                div.gameDetail__platform
                     h2 Platforms
-                    a(class="platform") Playstation 2
-                div
+                    for platform in game.platform
+                        a(href=platform.url)
+                            img.gameDetail__platform__icon(src=platform.icon)
+                div.gameDetail__genre
                     h2 Genre 
-                    a(class="genre") Action
-                    a(class="genre") Platform
-                h2 #{game.summary}
+                    for genre in game.genre
+                        a.genre(href=genre.url) #{genre.name}
+        br
         hr
+        br
         button
             a(href=game.url+'/delete') Delete
         button

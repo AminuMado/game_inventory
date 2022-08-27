@@ -2,7 +2,10 @@ extends layout
 
 block content
     main(class="main_content")
-        h1 Platform: #{platform.name}
+        h1 Platform:
+            div.platform__details
+                h1.platform__details__name #{platform.name}
+                img.platform__details__icon(src=platform.icon alt="icon")
         br
         div(style='margin-left:20px;margin-top:20px')
             h1 Games
@@ -10,17 +13,13 @@ block content
             br
             div(class="game_cards_container")
                 each game in platform_games
-                    a(class="game_card" href= game.url style= game.picture)
-                        span(class="game_card_title")= game.title  
+                    a(href=game.url class="game_card" style=`--bg-image: url(${game.photo})`)
+                        span(class="game_card_title") #{game.name}
                 else
-                    //- p This platform has no games
-                a(class="game_card" style="--bg-image: url(/images/xenogears.jpg)")
-                    span(class="game_card_title") Xenogears
-                a(class="game_card" style="--bg-image: url(/images/zelda.jpg)")
-                    span(class="game_card_title") Legend of Zelda Ocarina of Time
-                a(class="game_card" style="--bg-image: url(/images/zoneoftheenders.webp)")
-                    span(class="game_card_title") Zone of The Enders
+                    p This platform has no games  
+        br
         hr
+        br
         button
             a(href=platform.url+'/delete') Delete
         button 
