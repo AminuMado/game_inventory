@@ -6,7 +6,7 @@ block content
     section
       each review in review_list
        div(class="review")
-        h1(class="review_title") For: Metal Gear Soilid 2
+        h1(class="review_title") #{review.game.name}
         ul
          li
           a(href=review.url) from #{review.sourceSite}, rating: #{review.rating}
