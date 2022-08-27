@@ -27,15 +27,15 @@ block content
                         - developers.sort()
                         for developer in developers
                             if game
-                                option(value=developer._id selected=(developer._id.toString() == game.developer._id.toString() ? 'selected' : false) ) #{developer.name}
+                                option(value=developer._id selected=(developer._id.toString() === game.developer._id.toString() ? 'selected' : false) ) #{developer.name}
                             else
                                 option(value=developer._id) #{developer.name}
                 div.form_item
                     label(for = "summary") Summary:   
                     textarea(id="summary" name="summary") #{undefined === game ? "" : game.summary}
-                div.form_item_file
-                    label(for = "icon") Photo:
-                    input(type = "file" id="photo" name="photo")
+                div.form_item
+                    label(for = "photo") Photo URL:
+                    input(type = "text" id="photo" name="photo")
                 div.form_item_list
                     label Platform:
                     div.items

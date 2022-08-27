@@ -11,9 +11,9 @@ block content
                     input(type = "text" id="name" name="name" required
                           placeholder = "PlayStation,Xbox,Switch etc."
                           value=(undefined === platform ? "" : platform.name))
-                div.form_item_file
-                    label(for = "icon") Icon:
-                    input(type = "file" id="icon" name="icon")
+                div.form_item
+                    label(for = "icon") Icon URL:
+                    input(type = "text" id="icon" name="icon")
                 button(type = "submit") Submit
 
             if errors 

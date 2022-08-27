@@ -19,9 +19,9 @@ block content
                 div.form_item
                     label(for = "summary") Summary:        
                     textarea(id="summary" name="summary") #{undefined === developer ? "" : developer.summary}
-                div.form_item_file
-                    label(for = "icon") Icon:
-                    input(type = "file" id="icon" name="icon")
+                div.form_item
+                    label(for = "icon") Icon URL:
+                    input(type = "text" id="icon" name="icon" value=(undefined === developer ? "" : developer.icon))
                 button(type = "submit") Submit
 
             if errors 
