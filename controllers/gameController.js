@@ -48,16 +48,20 @@ exports.game_list = (req, res, next) => {
 
 // Display Detail Page for a specific Game
 exports.game_detail = (req, res, next) => {
-  Game.findById(req.params.id).exec((err, result) => {
-    if (err) return next(err);
-    if (result === null) {
-      const err = new Error("Game not Found");
-      err.status = 404;
-      return next(err);
-    }
-    // Successfull
-    res.render("game_detail", { title: "Game Detail", game: result });
-  });
+  Game.findById(req.params.id)
+    .populate("developer")
+    .populate("platform")
+    .populate("genre")
+    .exec((err, result) => {
+      if (err) return next(err);
+      if (result === null) {
+        const err = new Error("Game not Found");
+        err.status = 404;
+        return next(err);
+      }
+      // Successfull
+      res.render("game_detail", { title: "Game Detail", game: result });
+    });
 };
 
 // Display Game Create form on GET

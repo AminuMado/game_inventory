@@ -58,7 +58,7 @@ exports.review_create_post = [
   body("link", "link must not be empty").trim().isLength({ min: 1 }).escape(),
   body("rating", "Rating must not be empty.")
     .trim()
-    .isLength({ min: 3 })
+    .isLength({ min: 2 })
     .escape(),
   body("game.*").escape(),
 
@@ -164,7 +164,7 @@ exports.review_update_post = [
   body("link", "link must not be empty").trim().isLength({ min: 1 }).escape(),
   body("rating", "Rating must not be empty.")
     .trim()
-    .isLength({ min: 3 })
+    .isLength({ min: 2 })
     .escape(),
   body("game.*").escape(),
 
